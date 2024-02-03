@@ -204,13 +204,37 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true ,
         theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = { left = ' \\ ', right = ' / ' },
+        section_separators = { left = '', right = '' },
       },
     },
   },
+
+  -- {
+  --   "sainnhe/gruvbox-material",
+  --   priority = 1000,
+  --   config = function()
+  --       vim.o.background = "dark" -- or "light" for light mode
+  --       vim.g.gruvbox_material_background = "medium"
+  --       vim.cmd.colorscheme 'gruvbox-material'
+  --   end,
+  -- },
+
+  -- {
+  --   -- Set lualine as statusline
+  --   'nvim-lualine/lualine.nvim',
+  --   -- See `:help lualine.txt`
+  --   opts = {
+  --     options = {
+  --       icons_enabled = true,
+  --       theme = 'gruvbox-material',
+  --       component_separators = '',
+  --       section_separators = { left = '', right = '' },
+  --     },
+  --   },
+  -- },
 
   {
     -- Add indentation guides even on blank lines
@@ -266,7 +290,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -423,7 +447,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'bash', 'csv', 'dockerfile', 'json', 'lua', 'make', 'markdown', 'python', 'sql', 'terraform', 'vim', 'vimdoc', 'yaml' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -565,7 +589,8 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
+  ruff_lsp = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
